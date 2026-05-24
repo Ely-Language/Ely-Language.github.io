@@ -1,0 +1,15 @@
+[
+  {
+    "category": "Начало работы",
+    "files": [
+      {
+        "name": "Введение",
+        "file": "index.md"
+      },
+      {
+        "name": "Установка",
+        "file": "installation.md"
+      }
+    ]
+  }
+]

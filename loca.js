@@ -1,23 +1,23 @@
-// loca.js — локализация для главной страницы и страницы версий
+// loca.js — локализация Ely (главная страница, версии, документация)
 (function() {
     'use strict';
 
     const translations = {
         ru: {
-            // Навигация (общая)
+            // Главная навигация (общая)
             'nav-features': 'Возможности',
             'nav-performance': 'Производительность',
             'nav-versions': 'Версии',
             'nav-docs': 'Документация',
 
-            // Баннер версий
+            // Баннер версий (versions.html)
             'versions-banner-title': 'Ely – версии и стандарты',
             'versions-banner-desc': 'Стандарты (ГГ.М) и билды (build ДДМ) – выбирай стабильность и скачивай нужную версию.',
             'btn-download-ely': 'Скачать ElySpruce',
             'btn-vscode-extension': 'VS Code расширение',
             'btn-docs-banner': 'Документация',
 
-            // Текущий стандарт
+            // Текущий стандарт (versions.html)
             'current-standard-title': 'Текущий стандарт – 26.5',
             'current-standard-month': 'Май 2026',
             'latest-badge': 'последний билд',
@@ -27,8 +27,18 @@
             'all-builds-title': 'Все билды стандарта 26.5',
             'builds-note': 'Билды нумеруются по схеме: build ДДМ (день + месяц без нуля).',
 
-            // Предыдущие стандарты
+            // Предыдущие стандарты (versions.html)
             'prev-standards-title': 'Предыдущие стандарты',
+
+            // Документация (docs.html)
+            'docs-title': 'Ely – документация',
+            'docs-sidebar-title': 'Содержание',
+            'docs-loading': 'Загрузка документации...',
+            'docs-error-index': 'Не удалось загрузить документацию. Убедитесь, что папки docsmdru/docsmden существуют и содержат docs-index.json.',
+            'docs-nav-prev': '← Предыдущая',
+            'docs-nav-next': 'Следующая →',
+            'docs-burger-label': 'Меню',
+            'docs-close-sidebar-label': 'Закрыть',
 
             // Футер (общий)
             'footer-copyright': '© %year% Ely-Language. Открытый исходный код.',
@@ -36,7 +46,7 @@
             'footer-telegram': 'Telegram',
             'footer-extension': 'Расширение',
 
-            // Остальные ключи для главной страницы (оставлены как есть)
+            // ... (остальные ключи для главной страницы)
             'hero-subtitle': 'Вы выбираете, как вам писать',
             'hero-description': 'Универсальный молодой язык с простотой, гибкостью и скоростью',
             'cta-get-started': 'Начните работу',
@@ -85,14 +95,14 @@
             'nav-versions': 'Versions',
             'nav-docs': 'Docs',
 
-            // Banner versions
+            // Banner (versions)
             'versions-banner-title': 'Ely – versions and standards',
             'versions-banner-desc': 'Standards (YY.M) and builds (build DDM) – pick stability and download the version you need.',
             'btn-download-ely': 'Download ElySpruce',
             'btn-vscode-extension': 'VS Code extension',
             'btn-docs-banner': 'Documentation',
 
-            // Current standard
+            // Current standard (versions)
             'current-standard-title': 'Current standard – 26.5',
             'current-standard-month': 'May 2026',
             'latest-badge': 'latest build',
@@ -102,8 +112,18 @@
             'all-builds-title': 'All builds of standard 26.5',
             'builds-note': 'Builds are numbered as build DDM (day + month without leading zero).',
 
-            // Previous standards
+            // Previous standards (versions)
             'prev-standards-title': 'Previous standards',
+
+            // Documentation (docs.html)
+            'docs-title': 'Ely – documentation',
+            'docs-sidebar-title': 'Contents',
+            'docs-loading': 'Loading documentation...',
+            'docs-error-index': 'Failed to load documentation. Make sure docsmdru/docsmden folders exist and contain docs-index.json.',
+            'docs-nav-prev': '← Previous',
+            'docs-nav-next': 'Next →',
+            'docs-burger-label': 'Menu',
+            'docs-close-sidebar-label': 'Close',
 
             // Footer
             'footer-copyright': '© %year% Ely-Language. Open source.',
@@ -111,7 +131,7 @@
             'footer-telegram': 'Telegram',
             'footer-extension': 'Extension',
 
-            // Main page keys (unchanged)
+            // ... (main page keys)
             'hero-subtitle': 'You choose how to write',
             'hero-description': 'A universal young language with simplicity, flexibility, and speed',
             'cta-get-started': 'Get Started',
@@ -163,6 +183,7 @@
         localStorage.setItem('ely_language', lang);
     }
 
+    // Применение переводов ко всем элементам с id
     function applyLanguage(lang) {
         const dict = translations[lang];
         if (!dict) return;
@@ -178,8 +199,12 @@
                 }
             }
         }
+        // Специальная обработка для заголовка страницы
+        if (dict['docs-title']) {
+            document.title = dict['docs-title'];
+        }
 
-        // Активный класс для переключателя
+        // Активный класс для переключателя языка
         const langOptions = document.querySelectorAll('.lang-option');
         langOptions.forEach(opt => {
             const txt = opt.innerText.trim().toLowerCase();
@@ -193,6 +218,8 @@
         const newLang = current === 'ru' ? 'en' : 'ru';
         setCurrentLanguage(newLang);
         applyLanguage(newLang);
+        // Уведомляем другие скрипты о смене языка
+        window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: newLang } }));
     }
 
     function initLocalization() {
@@ -208,6 +235,15 @@
         const savedLang = getCurrentLanguage();
         applyLanguage(savedLang);
     }
+
+    // Глобальный API для получения перевода из других скриптов
+    window.elyTranslations = {
+        get: (key, lang = null) => {
+            const currentLang = lang || getCurrentLanguage();
+            return translations[currentLang]?.[key] || key;
+        },
+        getCurrentLanguage: getCurrentLanguage
+    };
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initLocalization);

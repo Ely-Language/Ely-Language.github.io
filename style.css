@@ -23,6 +23,10 @@
     --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+a {
+    color: var(--gold);
+}
+
 body {
     background-color: var(--bg-void);
     color: var(--text-primary);
@@ -76,7 +80,6 @@ body {
 }
 
 .container {
-    max-width: 1320px;
     margin: 0 auto;
     padding: 0 2.5rem;
     position: relative;
@@ -93,11 +96,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.2rem 0;
+    padding: 1.2rem ;
     position: fixed;
     z-index: 100;
-    width: calc(100% - 5rem);
-    max-width: 1320px;
+    width: 100%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -623,6 +625,8 @@ pre {
     display: flex;
     justify-content: space-between;
     padding: 2.5rem 0;
+    width: 100%;
+    margin-top: 3rem;
     border-top: 1px solid var(--border-subtle);
     color: var(--text-secondary);
 }
@@ -700,4 +704,48 @@ pre {
 
 * {
     transition: 0.5s;
+}
+body {
+    background: linear-gradient(135deg, #050505 0%, #000 50%, #0a0a0a 100%);
+    background-attachment: fixed;
+    transition: background 0.5s ease;
+}
+
+/* Анимированный градиент (опционально, для более премиального эффекта) */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+body {
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+}
+
+.feature-tile,
+.premium-card,
+.perf-item,
+.tooling-block,
+.cta-block-premium,
+.table-wrapper,
+.version-card,
+.version-list-card,
+.prev-standard-card,
+.code-card,
+.all-versions-wrapper,
+.gradient-banner {
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(232, 179, 57, 0.2);
+}
+
+.version-card:hover,
+.premium-card:hover {
+    background: rgba(30, 30, 30, 0.8);
+}
+
+.navbar,
+.footer {
+    background: transparent;
+    backdrop-filter: blur(20px);
 }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title id="docs-title">Ely – документация</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="docs.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/styles/atom-one-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.4/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/lib/highlight.min.js"></script>
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="glow-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="container docs-container">
+        <nav class="navbar glass-nav">
+            <div class="logo">
+                <div class="logo-icon"><img src="Spruce.png" alt="E" id="icon"></div>
+            </div>
+            <div class="nav-links">
+                <button class="burger-btn" id="burgerBtn" aria-label="Меню">☰</button>
+                <a href="index.html" id="nav-features">Возможности</a>
+                <a href="index.html#performance" id="nav-performance">Производительность</a>
+                <a href="versions.html" id="nav-versions">Версии</a>
+                <a href="docs.html" id="nav-docs" style="color: var(--gold); border-bottom-color: var(--gold);">Документация</a>
+                <button class="lang-switch" id="lang-toggle" aria-label="Switch language">
+                    <span class="lang-option">EN</span>
+                    <span class="lang-divider">/</span>
+                    <span class="lang-option active">RU</span>
+                </button>
+            </div>
+        </nav>
+
+        <div style="height: 7em;"></div>
+
+        <div class="docs-layout">
+            <aside class="docs-sidebar" id="docsSidebar">
+                <div class="sidebar-header">
+                    <h3 id="docs-sidebar-title">Содержание</h3>
+                    <button class="close-sidebar" id="closeSidebarBtn" aria-label="Закрыть">✕</button>
+                </div>
+                <nav class="docs-nav" id="docsNav"></nav>
+            </aside>
+
+            <main class="docs-content">
+                <div class="markdown-body" id="markdownContent">
+                    <div class="loading" id="docs-loading-placeholder">Загрузка документации...</div>
+                </div>
+                <div class="docs-navigation">
+                    <button class="nav-prev" id="navPrevBtn" disabled>←</button>
+                    <button class="nav-next" id="navNextBtn">→</button>
+                </div>
+            </main>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-copyright" id="footer-copyright">© 2026 Ely-Language. Открытый исходный код.</div>
+                <div class="footer-links">
+                    <a href="https://github.com/Ely-Language/ElySpruce" id="footer-github">GitHub</a>
+                    <a href="https://t.me/sudarfnaf/594" id="footer-telegram">Telegram</a>
+                    <a href="https://github.com/Ely-Language/Ely-VS-Code-Extension/releases/download/26.5/ely-language-0.0.1.vsix" id="footer-extension">Расширение</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="loca.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

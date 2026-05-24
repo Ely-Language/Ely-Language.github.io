@@ -1,0 +1,275 @@
+/* docs.css – стили для страницы документации с улучшенным меню и блюром */
+
+/* Импорт основного стиля (уже содержит глобальные правки) */
+@import url('style.css');
+
+.docs-container {
+    max-width: 1600px;
+}
+
+.docs-layout {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    position: relative;
+}
+
+/* Боковое меню – привязка к вьюпорту, скролл, уменьшенная ширина */
+.docs-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(232, 179, 57, 0.2);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    transition: var(--transition-smooth);
+    z-index: 90;
+}
+
+/* Кастомизация скроллбара для меню */
+.docs-sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+.docs-sidebar::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+.docs-sidebar::-webkit-scrollbar-thumb {
+    background: var(--gold-dim);
+    border-radius: 10px;
+}
+
+/* Шапка меню */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.2rem 1rem;
+    border-bottom: 1px solid rgba(232, 179, 57, 0.2);
+    margin-bottom: 1rem;
+}
+.sidebar-header h3 {
+    color: var(--gold);
+    font-size: 1.1rem;
+    margin: 0;
+}
+.close-sidebar {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.close-sidebar:hover {
+    color: var(--gold);
+}
+
+/* Навигация по категориям */
+.docs-nav {
+    padding: 0 0.5rem;
+}
+.nav-category {
+    margin-bottom: 0.8rem;
+}
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: background 0.2s;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+.category-header:hover {
+    background: rgba(232, 179, 57, 0.1);
+}
+.category-toggle {
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+}
+.category-toggle.collapsed {
+    transform: rotate(-90deg);
+}
+.category-pages {
+    list-style: none;
+    padding-left: 1.2rem;
+    margin-top: 0.2rem;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+.category-pages.collapsed {
+    max-height: 0 !important;
+}
+.category-pages li {
+    margin: 0.15rem 0;
+}
+.category-pages a {
+    display: block;
+    padding: 0.3rem 0.8rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: all 0.2s;
+    font-size: 0.85rem;
+}
+.category-pages a:hover {
+    background: rgba(232, 179, 57, 0.1);
+    color: var(--gold);
+}
+.category-pages a.active {
+    background: var(--gold);
+    color: #050505;
+    font-weight: 500;
+}
+
+/* Основной контент */
+.docs-content {
+    flex: 1;
+    min-width: 0;
+}
+.markdown-body {
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(232, 179, 57, 0.2);
+    padding: 2rem;
+    transition: var(--transition-smooth);
+}
+/* Стили для текста внутри markdown */
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+    color: var(--gold);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+.markdown-body p, .markdown-body li {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+.markdown-body code {
+    background: #1e1e1e;
+    padding: 0.2rem 0.4rem;
+    border-radius: 6px;
+    font-family: monospace;
+    color: var(--gold-light);
+}
+.markdown-body pre {
+    background: #0d0d0d;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+}
+.markdown-body pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+.markdown-body img {
+    max-width: 100%;
+    border-radius: var(--radius-md);
+}
+.markdown-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+.markdown-body th, .markdown-body td {
+    border: 1px solid var(--border-subtle);
+    padding: 0.5rem;
+}
+.markdown-body th {
+    background: #151515;
+    color: var(--gold);
+}
+.loading {
+    text-align: center;
+    padding: 3rem;
+    color: var(--gold);
+}
+
+/* Навигационные кнопки */
+.docs-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+.nav-prev, .nav-next {
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    padding: 0.6rem 1.5rem;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    font-weight: 600;
+}
+.nav-prev:hover, .nav-next:hover {
+    background: var(--gold);
+    color: #050505;
+    transform: translateY(-2px);
+}
+.nav-prev:disabled, .nav-next:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Бургер-кнопка (мобильная версия) */
+.burger-btn {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    font-size: 1.5rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+.burger-btn:hover {
+    background: rgba(232, 179, 57, 0.1);
+}
+
+/* Адаптивность: на узких экранах меню выезжает */
+@media (max-width: 900px) {
+    .burger-btn {
+        display: block;
+    }
+    .docs-layout {
+        flex-direction: column;
+    }
+    .docs-sidebar {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 280px;
+        height: 100vh;
+        z-index: 1000;
+        transition: left 0.3s ease;
+        border-radius: 0;
+        padding-top: 4rem;
+        max-height: 100vh;
+    }
+    .docs-sidebar.open {
+        left: 0;
+    }
+    .close-sidebar {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+    .docs-content {
+        width: 100%;
+    }
+}
+
