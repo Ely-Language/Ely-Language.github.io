@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ely — Версии и стандарты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .gradient-banner {
+            background: linear-gradient(135deg, rgba(232, 179, 57, 0.15) 0%, rgba(10, 10, 10, 0) 70%);
+            border-radius: var(--radius-xl);
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(232, 179, 57, 0.3);
+            backdrop-filter: blur(8px);
+            text-align: center;
+        }
+        .banner-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .current-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .version-card, .builds-list-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+            padding: 2rem;
+            transition: var(--transition-smooth);
+        }
+        .version-card:hover, .builds-list-card:hover {
+            border-color: var(--gold-dim);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px #000, 0 0 0 1px rgba(232, 179, 57, 0.15);
+        }
+        .standard-badge {
+            display: inline-block;
+            background: rgba(232, 179, 57, 0.15);
+            color: var(--gold);
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        .version-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.25rem;
+        }
+        .build-id {
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            margin-bottom: 1rem;
+        }
+        .build-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            border-left: 2px solid var(--gold-dim);
+            padding-left: 0.75rem;
+        }
+        .changelog-list, .builds-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 1rem 0;
+        }
+        .changelog-list li, .builds-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+        }
+        .changelog-list li:last-child, .builds-list li:last-child {
+            border-bottom: none;
+        }
+        .builds-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .download-btn-small {
+            background: transparent;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .download-btn-small:hover {
+            background: var(--gold);
+            color: #050505;
+        }
+        .prev-standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .prev-standard-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+            padding: 2rem;
+            transition: var(--transition-smooth);
+        }
+        .prev-standard-card:hover {
+            border-color: var(--gold-dim);
+            transform: translateY(-5px);
+        }
+        @media (max-width: 900px) {
+            .current-split {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise"></div>
+    <div class="glow-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="container">
+        <nav class="navbar glass-nav">
+            <div class="logo">
+                <div class="logo-icon"><img src="Spruce.png" alt="E" id="icon"></div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" id="nav-features">Возможности</a>
+                <a href="index.html#performance" id="nav-performance">Производительность</a>
+                <a href="versions.html" id="nav-versions" style="color: var(--gold); border-bottom-color: var(--gold);">Версии</a>
+                <a href="#" id="nav-docs">Документация</a>
+                <button class="lang-switch" id="lang-toggle" aria-label="Switch language">
+                    <span class="lang-option">EN</span>
+                    <span class="lang-divider">/</span>
+                    <span class="lang-option active">RU</span>
+                </button>
+            </div>
+        </nav>
+
+        <div style="height: 7em;"></div>
+
+        <section class="gradient-banner fade-in-up visible">
+            <h1 id="versions-banner-title" style="font-size: 3rem;">Ely – версии и стандарты</h1>
+            <p id="versions-banner-desc" style="font-size: 1.2rem; max-width: 700px; margin: 1rem auto;">Стандарты (ГГ.М) и билды (build ДДМ) – выбирай стабильность и скачивай нужную версию.</p>
+            <div class="banner-buttons">
+                <a href="#current" class="btn btn-primary" id="btn-download-ely">Скачать ElySpruce</a>
+                <a href="#" class="btn btn-outline" id="btn-vscode-extension">VS Code расширение</a>
+            </div>
+        </section>
+
+        <!-- Текущий стандарт 26.5 -->
+        <section id="current" class="fade-in-up visible">
+            <h2 id="current-standard-title" style="font-size: 2.5rem; margin-bottom: 0.5rem;">Текущий стандарт – 26.5</h2>
+            <p id="current-standard-month" style="color: var(--text-secondary); margin-bottom: 2rem;">Май 2026</p>
+
+            <div class="current-split">
+                <!-- Левая часть: последний билд -->
+                <div class="version-card">
+                    <div class="standard-badge" id="latest-badge">последний билд</div>
+                    <div class="version-number">build 185</div>
+                    <div class="build-date">18.05.2026</div>
+                    <p style="margin-bottom: 1rem;">Stable release</p>
+                    <h4 id="changelog-current-title" style="color: var(--gold); margin: 0.5rem 0 0.5rem 0;">Список изменений (build 215)</h4>
+                    <ul class="changelog-list">
+                        <li> ~ Compiler now generates C++ code (вместо C)</li>
+                        <li> ~ OOP fix</li>
+                        <li> + Added cppCode for writing in C++</li>
+                        <li> + interface and impl</li>
+                        <li> + ELP – Ely Package Manager</li>
+                        <li> + basic async/await</li>
+                    </ul>
+                    <a href="https://github.com/Ely-Language/ElySpruce/releases/tag/ElySpruce26_5_build185" class="btn btn-primary" style="margin-top: 1.5rem; display: inline-block;">Download</a>
+                </div>
+
+                <!-- Правая часть: все билды текущего стандарта -->
+                <div class="builds-list-card">
+                    <h3 id="all-builds-title" style="color: var(--gold); margin-bottom: 1.5rem;">Все билды стандарта 26.5</h3>
+                    <ul class="builds-list" id="builds-list-265">
+                        <li><span><strong>build 185</strong> – 18.05.2026</span> <a href="https://github.com/Ely-Language/ElySpruce/releases/tag/ElySpruce26_5_build185" class="download-btn-small">Download</a></li>
+                    </ul>
+                    <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+                        <p id="builds-note" style="color: var(--text-secondary); font-size: 0.9rem;">Билды нумеруются по схеме: build ДДМ (день + месяц без нуля).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Предыдущие стандарты -->
+        <section class="fade-in-up visible" style="margin: 4rem 0;">
+            <h2 id="prev-standards-title" style="font-size: 2rem; margin-bottom: 1rem;">Предыдущие стандарты</h2>
+            <div class="prev-standards-grid">
+                <!-- 26.4 -->
+                <div class="prev-standard-card">
+                    <div class="standard-badge">26.4</div>
+                    <div class="version-number" style="font-size: 2rem;">04.2026</div>
+                    <h4 style="color: var(--gold); margin: 1rem 0 0.5rem 0;">Changes</h4>
+                    <ul class="changelog-list">
+                        <li>Project published</li>
+                    </ul>
+                    <h4 style="color: var(--gold); margin: 1rem 0 0.5rem 0;">Versions</h4>
+                    <ul class="builds-list">
+                        <li><span><strong>build 234</strong> – 23.04.2026</span> <a href="#" class="download-btn-small">Download</a></li>
+                        <li><span><strong>build 214</strong> – 21.04.2026</span> <a href="#" class="download-btn-small">Download</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-copyright" id="footer-copyright">© 2026 Ely-Language. Открытый исходный код.</div>
+            <div class="footer-links">
+                <a href="https://github.com/Ely-Language/ElySpruce" id="footer-github">GitHub</a>
+                <a href="https://t.me/sudarfnaf/594" id="footer-telegram">Telegram</a>
+                <a href="https://github.com/Ely-Language/Ely-VS-Code-Extension/releases/download/26.5/ely-language-0.0.1.vsix" id="footer-extension">Расширение</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="loca.js"></script>
+    <script>
+        // Гарантия анимации
+        document.addEventListener('DOMContentLoaded', function() {
+            const animated = document.querySelectorAll('.gradient-banner, .current-split, .prev-standard-card');
+            animated.forEach(el => {
+                if (!el.classList.contains('fade-in-up')) el.classList.add('fade-in-up');
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    setTimeout(() => el.classList.add('visible'), 50);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
