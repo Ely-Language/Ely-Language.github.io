@@ -1,0 +1,326 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Ely Language",
+  "scopeName": "source.ely",
+  "fileTypes": ["ely"],
+  "patterns": [
+    { "include": "#using-line" },
+    { "include": "#c-code-blocks" },
+    { "include": "#keywords-exception" },
+    { "include": "#keywords-other" },
+    { "include": "#constant-language" },
+    { "include": "#declaration-class" },
+    { "include": "#declaration-func" },
+    { "include": "#storage-type-function" },
+    { "include": "#storage-type-class" },
+    { "include": "#storage-type" },
+    { "include": "#storage-modifier" },
+    { "include": "#support-function" },
+    { "include": "#variable-language" },
+    { "include": "#function-call" },
+    { "include": "#keyword-annotation" },
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#numbers" },
+    { "include": "#type-identifier" },
+    { "include": "#brackets" },
+    { "include": "#operators-arithmetic" },
+    { "include": "#operators-comparison" },
+    { "include": "#operators-assignment" },
+    { "include": "#operators-logical" },
+    { "include": "#operators-ternary" },
+    { "include": "#punctuation-colon" },
+    { "include": "#identifier" }
+  ],
+  "repository": {
+    "using-line": {
+      "match": "^\\s*using\\b.*$",
+      "name": "comment.line.using.ely"
+    },
+    "c-code-blocks": {
+      "patterns": [
+        {
+          "comment": "Встроенный C (cCode { ... })",
+          "begin": "\\b(cCode)\\s*\\{",
+          "end": "\\}",
+          "beginCaptures": {
+            "1": { "name": "keyword.other.embed.c.ely" },
+            "0": { "name": "meta.embedded.c.ely" }
+          },
+          "endCaptures": {
+            "0": { "name": "meta.embedded.c.ely" }
+          },
+          "name": "meta.embedded.c.ely",
+          "applyEndPatternLast": 1,
+          "patterns": [
+            { "include": "source.c" }
+          ]
+        },
+        {
+          "comment": "Встроенный C++ (cppCode { ... })",
+          "begin": "\\b(cppCode)\\s*\\{",
+          "end": "\\}",
+          "beginCaptures": {
+            "1": { "name": "keyword.other.embed.cpp.ely" },
+            "0": { "name": "meta.embedded.cpp.ely" }
+          },
+          "endCaptures": {
+            "0": { "name": "meta.embedded.cpp.ely" }
+          },
+          "name": "meta.embedded.cpp.ely",
+          "applyEndPatternLast": 1,
+          "patterns": [
+            { "include": "source.cpp" }
+          ]
+        }
+      ]
+    },
+    "keywords-exception": {
+      "match": "\\b(asafe|except|throw)\\b",
+      "name": "keyword.control.exception.ely"
+    },
+    "keywords-other": {
+      "patterns": [
+        {
+          "comment": "new с именем класса",
+          "match": "\\b(new)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+          "captures": {
+            "1": { "name": "keyword.other.new.ely" },
+            "2": { "name": "entity.name.type.class.ely" }
+          }
+        },
+        {
+          "comment": "if/else/elif/for/while/return/break/continue/switch/case/default/foreach/await",
+          "match": "\\b(if|else|elif|for|while|return|break|continue|switch|case|default|foreach|await)\\b",
+          "name": "keyword.control.ely"
+        }
+      ]
+    },
+    "constant-language": {
+      "patterns": [
+        {
+          "match": "\\b(true|false)\\b",
+          "name": "constant.language.boolean.ely"
+        },
+        {
+          "match": "\\bNULL\\b",
+          "name": "constant.language.null.ely"
+        }
+      ]
+    },
+    "declaration-class": {
+      "comment": "Имена после class/interface/impl/extends",
+      "match": "\\b(class|interface|impl|extends)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+      "captures": {
+        "1": { "name": "storage.type.class.ely" },
+        "2": { "name": "entity.name.type.class.ely" }
+      }
+    },
+    "declaration-func": {
+      "comment": "Имя функции после ключевого слова func",
+      "match": "\\b(func)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+      "captures": {
+        "1": { "name": "storage.type.function.ely" },
+        "2": { "name": "entity.name.function.ely" }
+      }
+    },
+    "storage-type-function": {
+      "match": "\\bfunc\\b",
+      "name": "storage.type.function.ely"
+    },
+    "storage-type-class": {
+      "match": "\\b(class|interface|impl|extends)\\b",
+      "name": "storage.type.class.ely"
+    },
+    "storage-type": {
+      "match": "\\b(int|flt|str|bool|void|arr)\\b",
+      "name": "storage.type.ely"
+    },
+    "storage-modifier": {
+      "match": "\\b(public|private|static|override|async|abstract|sealed|wait)\\b",
+      "name": "storage.modifier.ely"
+    },
+    "support-function": {
+      "match": "\\b(println|print|typeof|fields|methods|len|fileExists|fileRemove)\\b",
+      "name": "support.function.ely"
+    },
+    "variable-language": {
+      "match": "\\b(this|super)\\b",
+      "name": "variable.language.ely"
+    },
+    "function-call": {
+      "comment": "Вызов любой пользовательской функции (идентификатор перед скобками)",
+      "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\()",
+      "captures": {
+        "1": { "name": "entity.name.function.call.ely" }
+      }
+    },
+    "keyword-annotation": {
+      "match": "@\\w+",
+      "name": "keyword.other.annotation.ely"
+    },
+    "comments": {
+      "patterns": [
+        {
+          "match": "//.*$",
+          "name": "comment.line.double-slash.ely"
+        },
+        {
+          "begin": "/\\*",
+          "end": "\\*/",
+          "name": "comment.block.ely",
+          "patterns": [
+            { "match": "\\bTODO\\b", "name": "comment.todo.ely" }
+          ]
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "comment": "f-strings многострочные (тройные кавычки)",
+          "begin": "(f)(\"\"\"|''')",
+          "end": "\\2",
+          "beginCaptures": {
+            "1": { "name": "storage.type.fstring.ely" },
+            "2": { "name": "punctuation.definition.string.begin.ely" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.ely" }
+          },
+          "name": "string.quoted.multi.f.ely",
+          "patterns": [
+            { "include": "#fstring-interpolation" },
+            { "include": "#escape-sequences" }
+          ]
+        },
+        {
+          "comment": "f-strings однострочные",
+          "begin": "(f)(\"|')",
+          "end": "\\2",
+          "beginCaptures": {
+            "1": { "name": "storage.type.fstring.ely" },
+            "2": { "name": "punctuation.definition.string.begin.ely" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.ely" }
+          },
+          "name": "string.quoted.single.f.ely",
+          "patterns": [
+            { "include": "#fstring-interpolation" },
+            { "include": "#escape-sequences" }
+          ]
+        },
+        {
+          "comment": "Многострочные строки без форматирования",
+          "begin": "(\"\"\"|''')",
+          "end": "\\1",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.string.begin.ely" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.ely" }
+          },
+          "name": "string.quoted.multi.ely",
+          "patterns": [
+            { "include": "#escape-sequences" }
+          ]
+        },
+        {
+          "comment": "Однострочные строки без форматирования",
+          "begin": "(\"|')",
+          "end": "\\1",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.string.begin.ely" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.ely" }
+          },
+          "name": "string.quoted.single.ely",
+          "patterns": [
+            { "include": "#escape-sequences" }
+          ]
+        }
+      ]
+    },
+    "fstring-interpolation": {
+      "patterns": [
+        {
+          "begin": "\\{",
+          "end": "\\}",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.interpolation.begin.ely" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.interpolation.end.ely" }
+          },
+          "name": "meta.embedded.expression.ely",
+          "patterns": [
+            { "include": "$self" }
+          ]
+        }
+      ]
+    },
+    "escape-sequences": {
+      "match": "\\\\.",
+      "name": "constant.character.escape.ely"
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "comment": "Числа с плавающей точкой",
+          "match": "\\b\\d+\\.\\d+([eE][+-]?\\d+)?\\b",
+          "name": "constant.numeric.float.ely"
+        },
+        {
+          "comment": "Целые числа",
+          "match": "\\b\\d+\\b",
+          "name": "constant.numeric.integer.ely"
+        }
+      ]
+    },
+    "type-identifier": {
+      "comment": "Идентификаторы с заглавной буквы (кроме NULL) – имена классов/типов",
+      "match": "\\b(?!NULL\\b)[A-Z][a-zA-Z0-9_]*\\b",
+      "name": "entity.name.type.ely"
+    },
+    "brackets": {
+      "patterns": [
+        { "match": "\\(", "name": "punctuation.section.paren.begin.ely" },
+        { "match": "\\)", "name": "punctuation.section.paren.end.ely" },
+        { "match": "\\[", "name": "punctuation.section.bracket.begin.ely" },
+        { "match": "\\]", "name": "punctuation.section.bracket.end.ely" },
+        { "match": "\\{", "name": "punctuation.section.brace.begin.ely" },
+        { "match": "\\}", "name": "punctuation.section.brace.end.ely" }
+      ]
+    },
+    "operators-arithmetic": {
+      "match": "\\+|\\-|\\*|/|%",
+      "name": "keyword.operator.arithmetic.ely"
+    },
+    "operators-comparison": {
+      "match": "==|!=|<=|>=|<|>",
+      "name": "keyword.operator.comparison.ely"
+    },
+    "operators-assignment": {
+      "match": "=|\\+=|-=|\\*=|/=",
+      "name": "keyword.operator.assignment.ely"
+    },
+    "operators-logical": {
+      "match": "&&|\\|\\||!",
+      "name": "keyword.operator.logical.ely"
+    },
+    "operators-ternary": {
+      "match": "\\?\\?",
+      "name": "keyword.operator.ternary.ely"
+    },
+    "punctuation-colon": {
+      "match": ":",
+      "name": "punctuation.separator.ely"
+    },
+    "identifier": {
+      "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+      "name": "variable.other.ely"
+    }
+  }
+}

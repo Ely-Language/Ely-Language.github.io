@@ -9,10 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="docs.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/styles/atom-one-dark.min.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "shiki": "https://esm.sh/shiki@1.24.0"
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.4/purify.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/lib/highlight.min.js"></script>
 </head>
 <body>
     <div class="noise"></div>
@@ -41,7 +45,7 @@
         </nav>
 
         <div style="height: 7em;"></div>
-
+        
         <div class="docs-layout">
             <aside class="docs-sidebar" id="docsSidebar">
                 <div class="sidebar-header">
@@ -56,8 +60,8 @@
                     <div class="loading" id="docs-loading-placeholder">Загрузка документации...</div>
                 </div>
                 <div class="docs-navigation">
-                    <button class="nav-prev" id="navPrevBtn" disabled>←</button>
-                    <button class="nav-next" id="navNextBtn">→</button>
+                    <button class="nav-prev" id="navPrevBtn" disabled>← Предыдущая</button>
+                    <button class="nav-next" id="navNextBtn">Следующая →</button>
                 </div>
             </main>
         </div>
@@ -76,6 +80,6 @@
 
     <script src="script.js"></script>
     <script src="loca.js"></script>
-    <script src="docs.js"></script>
+    <script type="module" src="docs.js"></script>
 </body>
 </html>

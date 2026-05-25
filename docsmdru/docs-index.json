@@ -11,5 +11,26 @@
         "file": "installation.md"
       }
     ]
+  },
+  {
+    "category": "Типы данных",
+    "files": [
+      {
+        "name": "Динамика",
+        "file": "dynamic.md"
+      },
+      {
+        "name": "Статика",
+        "file": "static.md"
+      },
+      {
+        "name": "Массивы",
+        "file": "arrays.md"
+      },
+      {
+        "name": "Остальные",
+        "file": "others.md"
+      }
+    ]
   }
 ]
