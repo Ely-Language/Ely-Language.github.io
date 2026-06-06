@@ -29,7 +29,7 @@
             <div class="nav-links">
                 <a href="#features" id="nav-features">Возможности</a>
                 <a href="#performance" id="nav-performance">Производительность</a>
-                <a href="versions.html" id="nav-versions" >Версии</a>
+                <a href="versions.html" id="nav-versions">Версии</a>
                 <a href="docs.html" id="nav-docs">Документация</a>
                 <button class="lang-switch" id="lang-toggle" aria-label="Switch language">
                     <span class="lang-option">EN</span>
@@ -42,7 +42,6 @@
         <div style="height: 7em;"></div>
 
         <section class="hero" id="hero-sect">
-
             <h1 id="hero-title">Ely</h1>
             <div class="hero-gradient-text">
                 <p class="hero-subtitle" id="hero-subtitle">Вы выбираете, как вам писать</p>
@@ -55,7 +54,8 @@
                     <span>Начните работу</span>
                     <span class="btn-arrow">→</span>
                 </a>
-                <a href="https://github.com/Ely-Language/ElySpruce" class="btn btn-outline" id="cta-github">Исходный код</a>
+                <a href="https://github.com/Ely-Language/ElySpruce" class="btn btn-outline" id="cta-github">Исходный
+                    код</a>
             </div>
             <div class="hero-stats">
                 <div class="stat">
@@ -63,8 +63,8 @@
                     <span class="stat-label" id="stat-version-label">стандарт</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-value" id="stat-perf">20M</span>
-                    <span class="stat-label" id="stat-perf-label">оп/сек</span>
+                    <span class="stat-value" id="stat-perf">100M</span>
+                    <span class="stat-label" id="stat-perf-label">оп/сек (static)</span>
                 </div>
                 <div class="stat">
                     <span class="stat-value" id="stat-license">MIT</span>
@@ -98,7 +98,7 @@
                 <div class="feature-tile">
                     <div class="feature-icon">C++</div>
                     <h3 id="feature-2-title">Делайте программы быстрыми</h3>
-                    <p id="feature-2-desc">Статическая типизация даёт более 20M операций/сек.</p>
+                    <p id="feature-2-desc">Статическая типизация даёт более 100M операций/сек.</p>
                 </div>
                 <div class="feature-tile">
                     <div class="feature-icon">ANY</div>
@@ -115,12 +115,12 @@
             </div>
             <div class="perf-cards">
                 <div class="perf-item">
-                    <div class="perf-number" id="perf-static-value">≈ 20M</div>
-                    <div class="perf-desc" id="perf-static-label">(операций/сек, статический int)</div>
+                    <div class="perf-number" id="perf-static-value">≈ 100M</div>
+                    <div class="perf-desc" id="perf-static-label">(ops/s, static int)</div>
                 </div>
                 <div class="perf-item">
-                    <div class="perf-number" id="perf-any-value">≈ 500k</div>
-                    <div class="perf-desc" id="perf-any-label">(операций/сек, динамический any)</div>
+                    <div class="perf-number" id="perf-any-value">≈ 512k</div>
+                    <div class="perf-desc" id="perf-any-label">(ops/s, dynamic any)</div>
                 </div>
             </div>
 
@@ -138,105 +138,161 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Ely</strong></td>
-                            <td>(static + any)</td>
+                            <td><strong>Ely (static)</strong></td>
+                            <td>static + any</td>
                             <td>✅</td>
                             <td>✅</td>
                             <td>cCode + cppCode✅</td>
-                            <td id="perf-ely">≈ 20M / 500k (any)</td>
+                            <td><strong>≈ 100M</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ely (dynamic)</strong></td>
+                            <td>static + any</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>cCode + cppCode✅</td>
+                            <td>≈ 512k</td>
                         </tr>
                         <tr>
                             <td>C</td>
-                            <td>(static)</td>
+                            <td>static</td>
                             <td>❌</td>
                             <td>–</td>
                             <td>–</td>
-                            <td id="perf-c">≈ 25M</td>
+                            <td><strong>≈ 200M+</strong></td>
                         </tr>
                         <tr>
-                            <td>Go</td>
-                            <td>(static)</td>
+                            <td>Rust</td>
+                            <td>static</td>
+                            <td>❌ (Ownership)</td>
+                            <td>✅ (LLVM)</td>
                             <td>✅</td>
-                            <td>❌</td>
-                            <td>✅</td>
-                            <td id="perf-go">≈ 18M</td>
-                        </tr>
-                        <tr>
-                            <td>Python</td>
-                            <td>(dynamic)</td>
-                            <td>✅</td>
-                            <td>❌</td>
-                            <td>API</td>
-                            <td id="perf-python">≈ 100k-300k</td>
+                            <td>≈ 200M</td>
                         </tr>
                         <tr>
                             <td>Zig</td>
-                            <td>(static)</td>
+                            <td>static</td>
+                            <td>❌ (defer)</td>
+                            <td>✅ (LLVM)</td>
+                            <td>✅</td>
+                            <td>≈ 200M</td>
+                        </tr>
+                        <tr>
+                            <td>C++</td>
+                            <td>static</td>
+                            <td>❌ (RAII)</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>≈ 200M</td>
+                        </tr>
+                        <tr>
+                            <td>Go</td>
+                            <td>static</td>
+                            <td>✅</td>
                             <td>❌</td>
+                            <td>✅ (cgo)</td>
+                            <td>≈ 20M</td>
+                        </tr>
+                        <tr>
+                            <td>Java (JIT)</td>
+                            <td>static</td>
                             <td>✅</td>
+                            <td>❌ (bytecode)</td>
+                            <td>✅ (JNI)</td>
+                            <td>≈ 30M</td>
+                        </tr>
+                        <tr>
+                            <td>C# (.NET)</td>
+                            <td>static</td>
                             <td>✅</td>
-                            <td id="perf-zig">≈ 25M</td>
+                            <td>❌ (IL)</td>
+                            <td>✅ (P/Invoke)</td>
+                            <td>≈ 30M</td>
+                        </tr>
+                        <tr>
+                            <td>Swift</td>
+                            <td>static</td>
+                            <td>✅ (ARC)</td>
+                            <td>❌ (LLVM IR → native)</td>
+                            <td>✅</td>
+                            <td>≈ 30M</td>
+                        </tr>
+                        <tr>
+                            <td>TypeScript (Node)</td>
+                            <td>dynamic</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>✅ (C++ addons)</td>
+                            <td>≈ 10M</td>
+                        </tr>
+                        <tr>
+                            <td>Python 3.13</td>
+                            <td>dynamic</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>✅ (API)</td>
+                            <td>≈ 5M</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </section>
 
-        <section class="extended-features">
-            <div class="feature-grid-premium">
-                <div class="premium-card">
-                    <div class="card-icon">📦</div>
-                    <h4 id="mod-title">Модульность</h4>
-                    <p id="mod-desc">Компиляция в .dll/.so, экспорт публичных функций.</p>
+            <section class="extended-features">
+                <div class="feature-grid-premium">
+                    <div class="premium-card">
+                        <div class="card-icon">📦</div>
+                        <h4 id="mod-title">Модульность</h4>
+                        <p id="mod-desc">Компиляция в .dll/.so, экспорт публичных функций.</p>
+                    </div>
+                    <div class="premium-card">
+                        <div class="card-icon">🔍</div>
+                        <h4 id="reflect-title">Рефлексия</h4>
+                        <p id="reflect-desc">typeof, fields, methods — интроспекция времени выполнения.</p>
+                    </div>
+                    <div class="premium-card">
+                        <div class="card-icon">📄</div>
+                        <h4 id="json-title">File</h4>
+                        <p id="json-desc">Удобная работа с файлами через std модуль file</p>
+                    </div>
+                    <div class="premium-card">
+                        <div class="card-icon">🔗</div>
+                        <h4 id="ffi-title">C FFI</h4>
+                        <p id="ffi-desc">Вызов любых C‑функций, динамическая загрузка библиотек.</p>
+                    </div>
                 </div>
-                <div class="premium-card">
-                    <div class="card-icon">🔍</div>
-                    <h4 id="reflect-title">Рефлексия</h4>
-                    <p id="reflect-desc">typeof, fields, methods — интроспекция времени выполнения.</p>
-                </div>
-                <div class="premium-card">
-                    <div class="card-icon">📄</div>
-                    <h4 id="json-title">File</h4>
-                    <p id="json-desc">Удобная работа с файлами через std модуль file</p>
-                </div>
-                <div class="premium-card">
-                    <div class="card-icon">🔗</div>
-                    <h4 id="ffi-title">C FFI</h4>
-                    <p id="ffi-desc">Вызов любых C‑функций, динамическая загрузка библиотек.</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="tooling-cta">
-            <div class="tooling-block">
-                <h3 id="tooling-title">Инструментарий</h3>
-                <div class="tool-chips">
-                    <span class="chip" id="tool-compiler">компилятор Python → C++</span>
-                    <span class="chip" id="tool-ebt">ebt build - для компиляции</span>
-                    <span class="chip" id="tool-config">ebt project - для создания проекта</span>
-                    <span class="chip" id="tool-proj">elp - собственный пакетный менеджер</span>
+            <section class="tooling-cta">
+                <div class="tooling-block">
+                    <h3 id="tooling-title">Инструментарий</h3>
+                    <div class="tool-chips">
+                        <span class="chip" id="tool-compiler">компилятор Python → C++</span>
+                        <span class="chip" id="tool-ebt">ebt build - для компиляции</span>
+                        <span class="chip" id="tool-config">ebt project - для создания проекта</span>
+                        <span class="chip" id="tool-proj">elp - собственный пакетный менеджер</span>
+                    </div>
                 </div>
-            </div>
-            <div class="cta-block-premium">
-                <h2 id="cta-title">Начните сейчас</h2>
-                <p id="cta-subtitle">Одна команда — и ваш проект готов к написанию. Открытый код, премиальная скорость)</p>
-                <div class="cta-terminal" id="cta-command">ebt project my_app && cd my_app</div>
-                <div class="cta-buttons-group">
-                    <a href="versions.html" class="btn btn-primary" id="cta-download">Скачать ElySpruce</a>
-                    <a href="docs.html" class="btn btn-outline" id="cta-docs">Документация</a>
+                <div class="cta-block-premium">
+                    <h2 id="cta-title">Начните сейчас</h2>
+                    <p id="cta-subtitle">Одна команда — и ваш проект готов к написанию. Открытый код, премиальная
+                        скорость)</p>
+                    <div class="cta-terminal" id="cta-command">ebt project my_app && cd my_app</div>
+                    <div class="cta-buttons-group">
+                        <a href="versions.html" class="btn btn-primary" id="cta-download">Скачать ElySpruce</a>
+                        <a href="docs.html" class="btn btn-outline" id="cta-docs">Документация</a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-copyright" id="footer-copyright">© 2026 Ely-Language. Открытый исходный код.</div>
-            <div class="footer-links">
-                <a href="https://github.com/Ely-Language/ElySpruce" id="footer-github">GitHub</a>
-                <a href="https://t.me/sudarfnaf/594" id="footer-telegram">Telegram</a>
-                <a href="https://github.com/Ely-Language/Ely-VS-Code-Extension/releases/download/26.5/ely-language-0.0.1.vsix" id="footer-extension">Расширение</a>
-            </div>
-        </footer>
+            <footer class="footer">
+                <div class="footer-copyright" id="footer-copyright">© 2026 Ely-Language. Открытый исходный код.</div>
+                <div class="footer-links">
+                    <a href="https://github.com/Ely-Language/ElySpruce" id="footer-github">GitHub</a>
+                    <a href="https://t.me/sudarfnaf/594" id="footer-telegram">Telegram</a>
+                    <a href="https://github.com/Ely-Language/Ely-VS-Code-Extension/releases/download/26.5/ely-language-0.0.1.vsix"
+                        id="footer-extension">Расширение</a>
+                </div>
+            </footer>
     </div>
 
     <script src="script.js"></script>
